@@ -104,12 +104,7 @@ module Palmade
       end
 
       def message
-        if self.class.message_scope.nil?
-          m = I18n.translate(error, :scope => 'errors')
-        else
-          m = I18n.translate(error, :scope => "errors.#{self.class.message_scope}")
-        end
-
+        m = translate
         unless m.nil?
           if attachments.empty?
             m
@@ -117,12 +112,24 @@ module Palmade
             m % attachments
           end
         else
-          error
+          error_code
         end
       end
 
       def error_code
         (error.to_s.split('.').last || :error).to_sym
+      end
+
+      def translate
+        if defined?(::I18n)
+          if self.class.message_scope.nil?
+            m = I18n.translate(error, :scope => 'errors')
+          else
+            m = I18n.translate(error, :scope => "errors.#{self.class.message_scope}")
+          end
+        else
+          error_code.to_s
+        end
       end
     end
   end
