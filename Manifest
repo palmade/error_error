@@ -1,5 +1,6 @@
-lib/palmade/error_error.rb
-lib/palmade/error_error/error.rb
-Rakefile
 CHANGELOG
 Manifest
+Rakefile
+error_error.gemspec
+lib/palmade/error_error.rb
+lib/palmade/error_error/error.rb
